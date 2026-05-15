@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="lt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Berkshire Hathaway — 2026-03-31 13F</title>
+<style>:root { --brand: #1e40af; }
+:root {
+  --bg: #ffffff; --fg: #1a1a1a; --muted: #6b7280; --border: #e5e7eb;
+  --green: #16a34a; --red: #dc2626; --neutral: #6b7280;
+  --bg-soft: #f9fafb; --accent: var(--brand);
+}
+* { box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+       background: var(--bg); color: var(--fg); margin: 0; padding: 24px 16px; line-height: 1.45; }
+.container { max-width: 1280px; margin: 0 auto; }
+.topnav { display:flex; gap:12px; flex-wrap:wrap; padding-bottom:14px; margin-bottom:18px;
+          border-bottom: 1px solid var(--border); font-size:13px; }
+.topnav a { text-decoration:none; color:var(--muted); padding:4px 10px; border-radius:5px; }
+.topnav a:hover { background: var(--bg-soft); color: var(--fg); }
+.topnav a.active { background: var(--accent); color: white; }
+.header { display:flex; align-items:center; gap:20px; padding:18px 0; border-bottom:1px solid var(--border); margin-bottom:24px; flex-wrap:wrap; }
+.avatar { width:84px; height:84px; border-radius:50%; background:var(--brand); display:flex; align-items:center; justify-content:center; color:white; font-size:30px; font-weight:700; flex-shrink:0; }
+.header-info h1 { margin:0 0 4px 0; font-size:28px; font-weight:700; }
+.header-info .subtitle { color: var(--muted); font-size:14px; margin-bottom:10px; }
+.header-info .tagline { color: var(--muted); font-size:13px; font-style:italic; margin-bottom:12px; }
+.stats { display:flex; gap:24px; flex-wrap:wrap; }
+.stat { display:flex; flex-direction:column; }
+.stat-label { color:var(--muted); font-size:11px; text-transform:uppercase; letter-spacing:.5px; }
+.stat-value { font-size:17px; font-weight:600; margin-top:2px; }
+.stat-value.green { color: var(--green); } .stat-value.red { color: var(--red); }
+.section { margin-top:28px; }
+.section h2 { font-size:18px; margin:0 0 12px 0; }
+.section h2 .count { color: var(--muted); font-weight:400; font-size:13px; margin-left:6px; }
+.summary-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:20px; }
+.summary-card { background: var(--bg-soft); border:1px solid var(--border); border-radius:8px; padding:14px; }
+.summary-card h3 { margin:0 0 10px 0; font-size:14px; font-weight:600; }
+.summary-card ul { list-style:none; margin:0; padding:0; }
+.summary-card li { display:flex; gap:10px; align-items:center; padding:5px 0; border-bottom:1px solid var(--border); font-size:12px; }
+.summary-card li:last-child { border-bottom: none; }
+.ticker-pill { background: var(--accent); color:white; padding:2px 7px; border-radius:4px; font-size:11px; font-weight:600; font-family:monospace; min-width:58px; text-align:center; }
+.co { flex:1; color: var(--fg); }
+.act { font-size:11px; font-weight:500; }
+.act.green { color: var(--green); } .act.red { color: var(--red); }
+.val { color: var(--muted); font-size:11px; font-family:monospace; }
+table { width:100%; border-collapse:collapse; font-size:12.5px; }
+th, td { text-align:left; padding:8px 10px; border-bottom:1px solid var(--border); }
+th { background: var(--bg-soft); color: var(--muted); font-weight:500; font-size:10.5px; text-transform:uppercase; letter-spacing:.5px; }
+td.ticker { font-weight:700; font-family:monospace; }
+td.company { font-weight:500; }
+td.num { text-align:right; font-variant-numeric:tabular-nums; font-family:monospace; }
+td.pct { font-weight:600; }
+td.activity.green { color: var(--green); font-weight:500; }
+td.activity.red { color: var(--red); font-weight:500; }
+td.activity.neutral { color: var(--muted); }
+tr:hover { background: var(--bg-soft); }
+.opt-badge { display:inline-block; background:#fef3c7; color:#92400e; font-size:9px; padding:1px 5px; border-radius:3px; margin-left:4px; font-family:monospace; font-weight:600; vertical-align:middle; }
+.note { background:#f0f9ff; border-left:3px solid #0ea5e9; padding:10px 14px; border-radius:4px; color:#075985; font-size:12px; margin:12px 0; }
+.note.warn { background:#fef2f2; border-left-color:#dc2626; color:#7f1d1d; }
+.footer { margin-top:30px; padding-top:14px; border-top:1px solid var(--border); color: var(--muted); font-size:11px; line-height:1.6; }
+.footer a { color: var(--muted); }
+@media (max-width: 768px) {
+  .summary-grid { grid-template-columns: 1fr; }
+  th, td { padding: 5px 7px; font-size: 11.5px; }
+  .header { flex-direction: column; align-items: flex-start; }
+  .avatar { width:64px; height:64px; font-size:22px; }
+  .header-info h1 { font-size: 22px; }
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+<div class="topnav"><a href="index.html">Hub</a><a href="consensus.html">📊 Consensus</a><a href="duquesne.html">Stanley Druckenmiller</a><a href="berkshire.html" class="active">Warren Buffett</a><a href="pershing.html">Bill Ackman</a><a href="scion.html">Michael Burry</a><a href="appaloosa.html">David Tepper</a><a href="dme.html">David Einhorn (Greenlight)</a><a href="thirdpoint.html">Daniel Loeb</a><a href="tigerglobal.html">Chase Coleman</a><a href="soros.html">Soros šeima / George Soros</a></div>
+
+<div class="header">
+  <div class="avatar">WB</div>
+  <div class="header-info">
+    <h1>Berkshire Hathaway</h1>
+    <div class="subtitle">Warren Buffett · 13F ataskaita 2026-03-31 (pateikta 2026-05-15)</div>
+    <div class="tagline">Vertės investavimo legenda, ilgalaikis koncentruotas portfelis</div>
+    <div class="stats">
+      <div class="stat"><span class="stat-label">Ataskaita</span><span class="stat-value">2026-03-31</span></div>
+      <div class="stat"><span class="stat-label">Pozicijos</span><span class="stat-value">29</span></div>
+      <div class="stat"><span class="stat-label">Portfelis</span><span class="stat-value">$263.10B</span></div>
+      <div class="stat"><span class="stat-label">Naujos</span><span class="stat-value green">3</span></div>
+      <div class="stat"><span class="stat-label">Pridėjo</span><span class="stat-value green">4</span></div>
+      <div class="stat"><span class="stat-label">Sumažino</span><span class="stat-value red">6</span></div>
+      <div class="stat"><span class="stat-label">Pardavė</span><span class="stat-value red">16</span></div>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="summary-grid">
+  <div class="summary-card">
+    <h3>🟢 Didžiausi pirkimai (TOP 10)</h3>
+    <ul><li><span class="ticker-pill">GOOGL</span> <span class="co">Alphabet (Google)</span> <span class="act green">Pridėjo 204.0%</span> <span class="val">$15.60B</span></li><li><span class="ticker-pill">DAL</span> <span class="co">Delta Air Lines Inc</span> <span class="act green">Nauja pozicija</span> <span class="val">$2.65B</span></li><li><span class="ticker-pill">NYT</span> <span class="co">New York Times Co Mtn Be</span> <span class="act green">Pridėjo 199.0%</span> <span class="val">$1.27B</span></li><li><span class="ticker-pill">GOOG</span> <span class="co">Alphabet (Google)</span> <span class="act green">Nauja pozicija</span> <span class="val">$1.03B</span></li><li><span class="ticker-pill">LEN</span> <span class="co">Lennar Corp</span> <span class="act green">Pridėjo 43.2%</span> <span class="val">$877.1M</span></li><li><span class="ticker-pill">M</span> <span class="co">Macys Inc</span> <span class="act green">Nauja pozicija</span> <span class="val">$55.0M</span></li><li><span class="ticker-pill">LEN/B</span> <span class="co">Lennar Corp</span> <span class="act green">Pridėjo 31.3%</span> <span class="val">$20.0M</span></li></ul>
+  </div>
+  <div class="summary-card">
+    <h3>🔴 Didžiausi pardavimai (TOP 10)</h3>
+    <ul><li><span class="ticker-pill">BAC</span> <span class="co">Bank America Corp</span> <span class="act red">Sumažino 0.7%</span> <span class="val">~$28.45B</span></li><li><span class="ticker-pill">CVX</span> <span class="co">Chevron Corporation</span> <span class="act red">Sumažino 35.2%</span> <span class="val">~$19.84B</span></li><li><span class="ticker-pill">DVA</span> <span class="co">DaVita</span> <span class="act red">Sumažino 5.2%</span> <span class="val">~$3.61B</span></li><li><span class="ticker-pill">V</span> <span class="co">Visa</span> <span class="act red">Pardavė viską</span> <span class="val">~$2.91B</span></li><li><span class="ticker-pill">MA</span> <span class="co">Mastercard Incorporated</span> <span class="act red">Pardavė viską</span> <span class="val">~$2.28B</span></li><li><span class="ticker-pill">STZ</span> <span class="co">Constellation Brands Inc</span> <span class="act red">Sumažino 95.1%</span> <span class="val">~$1.79B</span></li><li><span class="ticker-pill">UNH</span> <span class="co">Unitedhealth Group Inc</span> <span class="act red">Pardavė viską</span> <span class="val">~$1.66B</span></li><li><span class="ticker-pill">DPZ</span> <span class="co">Domino's Pizza</span> <span class="act red">Pardavė viską</span> <span class="val">~$1.40B</span></li><li><span class="ticker-pill">—</span> <span class="co">Aon Plc</span> <span class="act red">Pardavė viską</span> <span class="val">~$1.27B</span></li><li><span class="ticker-pill">NUE</span> <span class="co">Nucor Corp</span> <span class="act red">Sumažino 39.0%</span> <span class="val">~$1.05B</span></li></ul>
+  </div>
+</div>
+
+<div class="section">
+  <h2>Visos pozicijos <span class="count">(29 įmonės, $263.10B AUM)</span></h2>
+  <div style="overflow-x:auto;">
+  <table>
+    <thead><tr>
+      <th>Tickeris</th><th>Įmonė</th>
+      <th style="text-align:right;">Alokacija</th>
+      <th style="text-align:right;">Akcijų sk.</th>
+      <th>Veiksmas</th>
+      <th style="text-align:right;">Vertė</th>
+      <th style="text-align:right;">Kaina (2026-03-31)</th>
+    </tr></thead>
+    <tbody><tr><td class="ticker">AAPL</td><td class="company">Apple</td><td class="num pct">21.99%</td><td class="num">227.92M</td><td class="activity neutral">Laiko</td><td class="num">$57.84B</td><td class="num">$253.79</td></tr><tr><td class="ticker">AXP</td><td class="company">American Express</td><td class="num pct">17.43%</td><td class="num">151.61M</td><td class="activity neutral">Laiko</td><td class="num">$45.86B</td><td class="num">$302.48</td></tr><tr><td class="ticker">KO</td><td class="company">Coca-Cola</td><td class="num pct">11.56%</td><td class="num">400.00M</td><td class="activity neutral">Laiko</td><td class="num">$30.42B</td><td class="num">$76.05</td></tr><tr><td class="ticker">BAC</td><td class="company">Bank America Corp</td><td class="num pct">9.52%</td><td class="num">513.62M</td><td class="activity red">Sumažino 0.7%</td><td class="num">$25.04B</td><td class="num">$48.75</td></tr><tr><td class="ticker">CVX</td><td class="company">Chevron Corporation</td><td class="num pct">6.64%</td><td class="num">84.38M</td><td class="activity red">Sumažino 35.2%</td><td class="num">$17.46B</td><td class="num">$206.90</td></tr><tr><td class="ticker">OXY</td><td class="company">Occidental Petroleum</td><td class="num pct">6.55%</td><td class="num">264.94M</td><td class="activity neutral">Laiko</td><td class="num">$17.22B</td><td class="num">$65.00</td></tr><tr><td class="ticker">GOOGL</td><td class="company">Alphabet (Google)</td><td class="num pct">5.93%</td><td class="num">54.25M</td><td class="activity green">Pridėjo 204.0%</td><td class="num">$15.60B</td><td class="num">$287.56</td></tr><tr><td class="ticker">—</td><td class="company">Chubb Ltd Switz</td><td class="num pct">4.24%</td><td class="num">34.25M</td><td class="activity neutral">Laiko</td><td class="num">$11.16B</td><td class="num">$325.93</td></tr><tr><td class="ticker">MCO</td><td class="company">Moody's Corp</td><td class="num pct">4.09%</td><td class="num">24.67M</td><td class="activity neutral">Laiko</td><td class="num">$10.76B</td><td class="num">$436.25</td></tr><tr><td class="ticker">KHC</td><td class="company">Kraft Heinz</td><td class="num pct">2.78%</td><td class="num">325.63M</td><td class="activity neutral">Laiko</td><td class="num">$7.32B</td><td class="num">$22.49</td></tr><tr><td class="ticker">DVA</td><td class="company">DaVita</td><td class="num pct">1.76%</td><td class="num">30.10M</td><td class="activity red">Sumažino 5.2%</td><td class="num">$4.63B</td><td class="num">$153.69</td></tr><tr><td class="ticker">KR</td><td class="company">Kroger Co</td><td class="num pct">1.38%</td><td class="num">50.00M</td><td class="activity neutral">Laiko</td><td class="num">$3.62B</td><td class="num">$72.36</td></tr><tr><td class="ticker">SIRI</td><td class="company">Siriusxm Holdings Inc</td><td class="num pct">1.09%</td><td class="num">124.81M</td><td class="activity neutral">Laiko</td><td class="num">$2.88B</td><td class="num">$23.08</td></tr><tr><td class="ticker">DAL</td><td class="company">Delta Air Lines Inc</td><td class="num pct">1.01%</td><td class="num">39.81M</td><td class="activity green">Nauja pozicija</td><td class="num">$2.65B</td><td class="num">$66.48</td></tr><tr><td class="ticker">VRSN</td><td class="company">VeriSign</td><td class="num pct">0.85%</td><td class="num">8.99M</td><td class="activity neutral">Laiko</td><td class="num">$2.23B</td><td class="num">$248.36</td></tr><tr><td class="ticker">COF</td><td class="company">Capital One Finl Corp</td><td class="num pct">0.50%</td><td class="num">7.15M</td><td class="activity neutral">Laiko</td><td class="num">$1.30B</td><td class="num">$182.43</td></tr><tr><td class="ticker">NYT</td><td class="company">New York Times Co Mtn Be</td><td class="num pct">0.48%</td><td class="num">15.15M</td><td class="activity green">Pridėjo 199.0%</td><td class="num">$1.27B</td><td class="num">$83.73</td></tr><tr><td class="ticker">ALLY</td><td class="company">Ally Finl Inc</td><td class="num pct">0.43%</td><td class="num">29.00M</td><td class="activity neutral">Laiko</td><td class="num">$1.14B</td><td class="num">$39.23</td></tr><tr><td class="ticker">GOOG</td><td class="company">Alphabet (Google)</td><td class="num pct">0.39%</td><td class="num">3.59M</td><td class="activity green">Nauja pozicija</td><td class="num">$1.03B</td><td class="num">$286.86</td></tr><tr><td class="ticker">LLYVK</td><td class="company">Liberty Live Holdings Inc</td><td class="num pct">0.38%</td><td class="num">10.59M</td><td class="activity red">Sumažino 3.0%</td><td class="num">$996.4M</td><td class="num">$94.11</td></tr><tr><td class="ticker">LEN</td><td class="company">Lennar Corp</td><td class="num pct">0.33%</td><td class="num">10.10M</td><td class="activity green">Pridėjo 43.2%</td><td class="num">$877.1M</td><td class="num">$86.84</td></tr><tr><td class="ticker">NUE</td><td class="company">Nucor Corp</td><td class="num pct">0.25%</td><td class="num">3.91M</td><td class="activity red">Sumažino 39.0%</td><td class="num">$660.7M</td><td class="num">$169.10</td></tr><tr><td class="ticker">LLYVA</td><td class="company">Liberty Live Holdings Inc</td><td class="num pct">0.17%</td><td class="num">4.99M</td><td class="activity neutral">Laiko</td><td class="num">$457.0M</td><td class="num">$91.64</td></tr><tr><td class="ticker">LPX</td><td class="company">Louisiana Pac Corp</td><td class="num pct">0.16%</td><td class="num">5.66M</td><td class="activity neutral">Laiko</td><td class="num">$412.1M</td><td class="num">$72.75</td></tr><tr><td class="ticker">STZ</td><td class="company">Constellation Brands Inc</td><td class="num pct">0.04%</td><td class="num">632.9K</td><td class="activity red">Sumažino 95.1%</td><td class="num">$94.9M</td><td class="num">$150.00</td></tr><tr><td class="ticker">NVR</td><td class="company">Nvr Inc</td><td class="num pct">0.03%</td><td class="num">11.1K</td><td class="activity neutral">Laiko</td><td class="num">$73.2M</td><td class="num">$6589.83</td></tr><tr><td class="ticker">M</td><td class="company">Macys Inc</td><td class="num pct">0.02%</td><td class="num">3.04M</td><td class="activity green">Nauja pozicija</td><td class="num">$55.0M</td><td class="num">$18.09</td></tr><tr><td class="ticker">LEN/B</td><td class="company">Lennar Corp</td><td class="num pct">0.01%</td><td class="num">237.7K</td><td class="activity green">Pridėjo 31.3%</td><td class="num">$20.0M</td><td class="num">$84.12</td></tr><tr><td class="ticker">JEF</td><td class="company">Jefferies Financial Group In</td><td class="num pct">0.01%</td><td class="num">433.6K</td><td class="activity neutral">Laiko</td><td class="num">$17.9M</td><td class="num">$41.27</td></tr></tbody>
+  </table></div>
+</div>
+
+<div class="section">
+  <h2>❌ Pilnai parduotos pozicijos <span class="count">(16 įmonės)</span></h2>
+  <div style="overflow-x:auto;">
+  <table>
+    <thead><tr>
+      <th>Tickeris</th><th>Įmonė</th>
+      <th style="text-align:right;">Akcijų sk. (prieš)</th>
+      <th style="text-align:right;">Vertė 2025-12-31</th>
+    </tr></thead>
+    <tbody><tr><td class="ticker">V</td><td class="company">Visa</td><td class="num">8.30M</td><td class="num">$2.91B</td></tr><tr><td class="ticker">MA</td><td class="company">Mastercard Incorporated</td><td class="num">3.99M</td><td class="num">$2.28B</td></tr><tr><td class="ticker">UNH</td><td class="company">Unitedhealth Group Inc</td><td class="num">5.04M</td><td class="num">$1.66B</td></tr><tr><td class="ticker">DPZ</td><td class="company">Domino's Pizza</td><td class="num">3.35M</td><td class="num">$1.40B</td></tr><tr><td class="ticker">—</td><td class="company">Aon Plc</td><td class="num">3.60M</td><td class="num">$1.27B</td></tr><tr><td class="ticker">POOL</td><td class="company">Pool Corp</td><td class="num">3.07M</td><td class="num">$702.0M</td></tr><tr><td class="ticker">AMZN</td><td class="company">Amazon</td><td class="num">2.28M</td><td class="num">$525.3M</td></tr><tr><td class="ticker">HEI/A</td><td class="company">Heico Corp New</td><td class="num">1.29M</td><td class="num">$326.8M</td></tr><tr><td class="ticker">FWONK</td><td class="company">Liberty Media Corp Del</td><td class="num">3.02M</td><td class="num">$297.4M</td></tr><tr><td class="ticker">CHTR</td><td class="company">Charter Communications Inc N</td><td class="num">1.06M</td><td class="num">$221.5M</td></tr><tr><td class="ticker">LAMR</td><td class="company">Lamar Advertising Co New</td><td class="num">1.20M</td><td class="num">$152.2M</td></tr><tr><td class="ticker">—</td><td class="company">Allegion Plc</td><td class="num">780.1K</td><td class="num">$124.2M</td></tr><tr><td class="ticker">DEO</td><td class="company">Diageo Plc</td><td class="num">227.8K</td><td class="num">$19.6M</td></tr><tr><td class="ticker">—</td><td class="company">Liberty Latin America Ltd</td><td class="num">2.40M</td><td class="num">$17.7M</td></tr><tr><td class="ticker">—</td><td class="company">Liberty Latin America Ltd</td><td class="num">1.28M</td><td class="num">$9.6M</td></tr><tr><td class="ticker">BATRK</td><td class="company">Atlanta Braves Hldgs Inc</td><td class="num">115.4K</td><td class="num">$4.6M</td></tr></tbody>
+  </table></div>
+</div>
+
+<div class="section">
+  <h2>📊 Pasirinkimo sandoriai (options) <span class="count">(0 pozicijos)</span></h2>
+  <div style="overflow-x:auto;">
+  <table>
+    <thead><tr><th>Tickeris</th><th>Įmonė</th>
+      <th style="text-align:right;">Call vertė</th>
+      <th style="text-align:right;">Put vertė</th>
+    </tr></thead>
+    <tbody><tr><td colspan="4" style="color:var(--muted);font-style:italic;text-align:center;padding:14px">Pasirinkimo sandorių (options) nepateikta</td></tr></tbody>
+  </table></div>
+</div>
+
+<div class="footer">
+  <strong>Šaltinis:</strong> SEC EDGAR · CIK 0001067983 · 13F-HR · BERKSHIRE HATHAWAY INC<br>
+  <strong>Originalus filing:</strong> <a href="https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0001067983&type=13F-HR&dateb=&owner=include&count=10">SEC EDGAR</a><br>
+  <strong>Generuota:</strong> 2026-05-15 · Lyginama su praeitu ketvirčiu (2025-12-31).<br><br>
+  <em>13F ataskaita rodo TIK long pozicijas JAV vertybiniuose popieriuose. Short pozicijos, fiksuoto pajamingumo, ne-JAV akcijos ir privatūs investavimai į ataskaitą neįtraukti.</em>
+</div>
+
+</div>
+</body>
+</html>

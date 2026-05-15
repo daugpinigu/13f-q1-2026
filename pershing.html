@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="lt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pershing Square — 2026-03-31 13F</title>
+<style>:root { --brand: #dc2626; }
+:root {
+  --bg: #ffffff; --fg: #1a1a1a; --muted: #6b7280; --border: #e5e7eb;
+  --green: #16a34a; --red: #dc2626; --neutral: #6b7280;
+  --bg-soft: #f9fafb; --accent: var(--brand);
+}
+* { box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+       background: var(--bg); color: var(--fg); margin: 0; padding: 24px 16px; line-height: 1.45; }
+.container { max-width: 1280px; margin: 0 auto; }
+.topnav { display:flex; gap:12px; flex-wrap:wrap; padding-bottom:14px; margin-bottom:18px;
+          border-bottom: 1px solid var(--border); font-size:13px; }
+.topnav a { text-decoration:none; color:var(--muted); padding:4px 10px; border-radius:5px; }
+.topnav a:hover { background: var(--bg-soft); color: var(--fg); }
+.topnav a.active { background: var(--accent); color: white; }
+.header { display:flex; align-items:center; gap:20px; padding:18px 0; border-bottom:1px solid var(--border); margin-bottom:24px; flex-wrap:wrap; }
+.avatar { width:84px; height:84px; border-radius:50%; background:var(--brand); display:flex; align-items:center; justify-content:center; color:white; font-size:30px; font-weight:700; flex-shrink:0; }
+.header-info h1 { margin:0 0 4px 0; font-size:28px; font-weight:700; }
+.header-info .subtitle { color: var(--muted); font-size:14px; margin-bottom:10px; }
+.header-info .tagline { color: var(--muted); font-size:13px; font-style:italic; margin-bottom:12px; }
+.stats { display:flex; gap:24px; flex-wrap:wrap; }
+.stat { display:flex; flex-direction:column; }
+.stat-label { color:var(--muted); font-size:11px; text-transform:uppercase; letter-spacing:.5px; }
+.stat-value { font-size:17px; font-weight:600; margin-top:2px; }
+.stat-value.green { color: var(--green); } .stat-value.red { color: var(--red); }
+.section { margin-top:28px; }
+.section h2 { font-size:18px; margin:0 0 12px 0; }
+.section h2 .count { color: var(--muted); font-weight:400; font-size:13px; margin-left:6px; }
+.summary-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:20px; }
+.summary-card { background: var(--bg-soft); border:1px solid var(--border); border-radius:8px; padding:14px; }
+.summary-card h3 { margin:0 0 10px 0; font-size:14px; font-weight:600; }
+.summary-card ul { list-style:none; margin:0; padding:0; }
+.summary-card li { display:flex; gap:10px; align-items:center; padding:5px 0; border-bottom:1px solid var(--border); font-size:12px; }
+.summary-card li:last-child { border-bottom: none; }
+.ticker-pill { background: var(--accent); color:white; padding:2px 7px; border-radius:4px; font-size:11px; font-weight:600; font-family:monospace; min-width:58px; text-align:center; }
+.co { flex:1; color: var(--fg); }
+.act { font-size:11px; font-weight:500; }
+.act.green { color: var(--green); } .act.red { color: var(--red); }
+.val { color: var(--muted); font-size:11px; font-family:monospace; }
+table { width:100%; border-collapse:collapse; font-size:12.5px; }
+th, td { text-align:left; padding:8px 10px; border-bottom:1px solid var(--border); }
+th { background: var(--bg-soft); color: var(--muted); font-weight:500; font-size:10.5px; text-transform:uppercase; letter-spacing:.5px; }
+td.ticker { font-weight:700; font-family:monospace; }
+td.company { font-weight:500; }
+td.num { text-align:right; font-variant-numeric:tabular-nums; font-family:monospace; }
+td.pct { font-weight:600; }
+td.activity.green { color: var(--green); font-weight:500; }
+td.activity.red { color: var(--red); font-weight:500; }
+td.activity.neutral { color: var(--muted); }
+tr:hover { background: var(--bg-soft); }
+.opt-badge { display:inline-block; background:#fef3c7; color:#92400e; font-size:9px; padding:1px 5px; border-radius:3px; margin-left:4px; font-family:monospace; font-weight:600; vertical-align:middle; }
+.note { background:#f0f9ff; border-left:3px solid #0ea5e9; padding:10px 14px; border-radius:4px; color:#075985; font-size:12px; margin:12px 0; }
+.note.warn { background:#fef2f2; border-left-color:#dc2626; color:#7f1d1d; }
+.footer { margin-top:30px; padding-top:14px; border-top:1px solid var(--border); color: var(--muted); font-size:11px; line-height:1.6; }
+.footer a { color: var(--muted); }
+@media (max-width: 768px) {
+  .summary-grid { grid-template-columns: 1fr; }
+  th, td { padding: 5px 7px; font-size: 11.5px; }
+  .header { flex-direction: column; align-items: flex-start; }
+  .avatar { width:64px; height:64px; font-size:22px; }
+  .header-info h1 { font-size: 22px; }
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+<div class="topnav"><a href="index.html">Hub</a><a href="consensus.html">📊 Consensus</a><a href="duquesne.html">Stanley Druckenmiller</a><a href="berkshire.html">Warren Buffett</a><a href="pershing.html" class="active">Bill Ackman</a><a href="scion.html">Michael Burry</a><a href="appaloosa.html">David Tepper</a><a href="dme.html">David Einhorn (Greenlight)</a><a href="thirdpoint.html">Daniel Loeb</a><a href="tigerglobal.html">Chase Coleman</a><a href="soros.html">Soros šeima / George Soros</a></div>
+
+<div class="header">
+  <div class="avatar">BA</div>
+  <div class="header-info">
+    <h1>Pershing Square</h1>
+    <div class="subtitle">Bill Ackman · 13F ataskaita 2026-03-31 (pateikta 2026-05-15)</div>
+    <div class="tagline">Koncentruotas aktyvistas, ~8-10 pozicijų</div>
+    <div class="stats">
+      <div class="stat"><span class="stat-label">Ataskaita</span><span class="stat-value">2026-03-31</span></div>
+      <div class="stat"><span class="stat-label">Pozicijos</span><span class="stat-value">11</span></div>
+      <div class="stat"><span class="stat-label">Portfelis</span><span class="stat-value">$13.71B</span></div>
+      <div class="stat"><span class="stat-label">Naujos</span><span class="stat-value green">1</span></div>
+      <div class="stat"><span class="stat-label">Pridėjo</span><span class="stat-value green">1</span></div>
+      <div class="stat"><span class="stat-label">Sumažino</span><span class="stat-value red">6</span></div>
+      <div class="stat"><span class="stat-label">Pardavė</span><span class="stat-value red">1</span></div>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="summary-grid">
+  <div class="summary-card">
+    <h3>🟢 Didžiausi pirkimai (TOP 10)</h3>
+    <ul><li><span class="ticker-pill">AMZN</span> <span class="co">Amazon</span> <span class="act green">Pridėjo 19.2%</span> <span class="val">$2.39B</span></li><li><span class="ticker-pill">MSFT</span> <span class="co">Microsoft</span> <span class="act green">Nauja pozicija</span> <span class="val">$2.09B</span></li></ul>
+  </div>
+  <div class="summary-card">
+    <h3>🔴 Didžiausi pardavimai (TOP 10)</h3>
+    <ul><li><span class="ticker-pill">BN</span> <span class="co">Brookfield Corp</span> <span class="act red">Sumažino 2.8%</span> <span class="val">~$2.82B</span></li><li><span class="ticker-pill">UBER</span> <span class="co">Uber Technologies</span> <span class="act red">Sumažino 0.8%</span> <span class="val">~$2.47B</span></li><li><span class="ticker-pill">GOOG</span> <span class="co">Alphabet (Google)</span> <span class="act red">Sumažino 94.9%</span> <span class="val">~$1.93B</span></li><li><span class="ticker-pill">META</span> <span class="co">Meta Platforms</span> <span class="act red">Sumažino 0.5%</span> <span class="val">~$1.76B</span></li><li><span class="ticker-pill">QSR</span> <span class="co">Restaurant Brands Intl</span> <span class="act red">Sumažino 1.0%</span> <span class="val">~$1.56B</span></li><li><span class="ticker-pill">HLT</span> <span class="co">Hilton Worldwide</span> <span class="act red">Pardavė viską</span> <span class="val">~$870.0M</span></li></ul>
+  </div>
+</div>
+
+<div class="section">
+  <h2>Visos pozicijos <span class="count">(11 įmonės, $13.71B AUM)</span></h2>
+  <div style="overflow-x:auto;">
+  <table>
+    <thead><tr>
+      <th>Tickeris</th><th>Įmonė</th>
+      <th style="text-align:right;">Alokacija</th>
+      <th style="text-align:right;">Akcijų sk.</th>
+      <th>Veiksmas</th>
+      <th style="text-align:right;">Vertė</th>
+      <th style="text-align:right;">Kaina (2026-03-31)</th>
+    </tr></thead>
+    <tbody><tr><td class="ticker">BN</td><td class="company">Brookfield Corp</td><td class="num pct">17.62%</td><td class="num">59.70M</td><td class="activity red">Sumažino 2.8%</td><td class="num">$2.42B</td><td class="num">$40.47</td></tr><tr><td class="ticker">AMZN</td><td class="company">Amazon</td><td class="num pct">17.39%</td><td class="num">11.45M</td><td class="activity green">Pridėjo 19.2%</td><td class="num">$2.39B</td><td class="num">$208.27</td></tr><tr><td class="ticker">UBER</td><td class="company">Uber Technologies</td><td class="num pct">15.71%</td><td class="num">29.96M</td><td class="activity red">Sumažino 0.8%</td><td class="num">$2.15B</td><td class="num">$71.93</td></tr><tr><td class="ticker">MSFT</td><td class="company">Microsoft</td><td class="num pct">15.26%</td><td class="num">5.65M</td><td class="activity green">Nauja pozicija</td><td class="num">$2.09B</td><td class="num">$370.17</td></tr><tr><td class="ticker">QSR</td><td class="company">Restaurant Brands Intl</td><td class="num pct">12.20%</td><td class="num">22.65M</td><td class="activity red">Sumažino 1.0%</td><td class="num">$1.67B</td><td class="num">$73.90</td></tr><tr><td class="ticker">META</td><td class="company">Meta Platforms</td><td class="num pct">11.10%</td><td class="num">2.66M</td><td class="activity red">Sumažino 0.5%</td><td class="num">$1.52B</td><td class="num">$572.13</td></tr><tr><td class="ticker">HHH</td><td class="company">Howard Hughes Holdings Inc</td><td class="num pct">8.70%</td><td class="num">18.85M</td><td class="activity neutral">Laiko</td><td class="num">$1.19B</td><td class="num">$63.26</td></tr><tr><td class="ticker">SEG</td><td class="company">Seaport Entmt Group Inc</td><td class="num pct">0.79%</td><td class="num">5.02M</td><td class="activity neutral">Laiko</td><td class="num">$107.9M</td><td class="num">$21.48</td></tr><tr><td class="ticker">GOOG</td><td class="company">Alphabet (Google)</td><td class="num pct">0.65%</td><td class="num">311.7K</td><td class="activity red">Sumažino 94.9%</td><td class="num">$89.4M</td><td class="num">$286.86</td></tr><tr><td class="ticker">HTZ</td><td class="company">Hertz Global Hldgs Inc</td><td class="num pct">0.51%</td><td class="num">15.24M</td><td class="activity neutral">Laiko</td><td class="num">$70.3M</td><td class="num">$4.61</td></tr><tr><td class="ticker">GOOGL</td><td class="company">Alphabet (Google)</td><td class="num pct">0.07%</td><td class="num">32.4K</td><td class="activity red">Sumažino 95.2%</td><td class="num">$9.3M</td><td class="num">$287.56</td></tr></tbody>
+  </table></div>
+</div>
+
+<div class="section">
+  <h2>❌ Pilnai parduotos pozicijos <span class="count">(1 įmonės)</span></h2>
+  <div style="overflow-x:auto;">
+  <table>
+    <thead><tr>
+      <th>Tickeris</th><th>Įmonė</th>
+      <th style="text-align:right;">Akcijų sk. (prieš)</th>
+      <th style="text-align:right;">Vertė 2025-12-31</th>
+    </tr></thead>
+    <tbody><tr><td class="ticker">HLT</td><td class="company">Hilton Worldwide</td><td class="num">3.03M</td><td class="num">$870.0M</td></tr></tbody>
+  </table></div>
+</div>
+
+<div class="section">
+  <h2>📊 Pasirinkimo sandoriai (options) <span class="count">(0 pozicijos)</span></h2>
+  <div style="overflow-x:auto;">
+  <table>
+    <thead><tr><th>Tickeris</th><th>Įmonė</th>
+      <th style="text-align:right;">Call vertė</th>
+      <th style="text-align:right;">Put vertė</th>
+    </tr></thead>
+    <tbody><tr><td colspan="4" style="color:var(--muted);font-style:italic;text-align:center;padding:14px">Pasirinkimo sandorių (options) nepateikta</td></tr></tbody>
+  </table></div>
+</div>
+
+<div class="footer">
+  <strong>Šaltinis:</strong> SEC EDGAR · CIK 0001336528 · 13F-HR · Pershing Square Capital Management, L.P.<br>
+  <strong>Originalus filing:</strong> <a href="https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0001336528&type=13F-HR&dateb=&owner=include&count=10">SEC EDGAR</a><br>
+  <strong>Generuota:</strong> 2026-05-15 · Lyginama su praeitu ketvirčiu (2025-12-31).<br><br>
+  <em>13F ataskaita rodo TIK long pozicijas JAV vertybiniuose popieriuose. Short pozicijos, fiksuoto pajamingumo, ne-JAV akcijos ir privatūs investavimai į ataskaitą neįtraukti.</em>
+</div>
+
+</div>
+</body>
+</html>

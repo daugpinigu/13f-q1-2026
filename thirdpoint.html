@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="lt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Third Point — 2026-03-31 13F</title>
+<style>:root { --brand: #9333ea; }
+:root {
+  --bg: #ffffff; --fg: #1a1a1a; --muted: #6b7280; --border: #e5e7eb;
+  --green: #16a34a; --red: #dc2626; --neutral: #6b7280;
+  --bg-soft: #f9fafb; --accent: var(--brand);
+}
+* { box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+       background: var(--bg); color: var(--fg); margin: 0; padding: 24px 16px; line-height: 1.45; }
+.container { max-width: 1280px; margin: 0 auto; }
+.topnav { display:flex; gap:12px; flex-wrap:wrap; padding-bottom:14px; margin-bottom:18px;
+          border-bottom: 1px solid var(--border); font-size:13px; }
+.topnav a { text-decoration:none; color:var(--muted); padding:4px 10px; border-radius:5px; }
+.topnav a:hover { background: var(--bg-soft); color: var(--fg); }
+.topnav a.active { background: var(--accent); color: white; }
+.header { display:flex; align-items:center; gap:20px; padding:18px 0; border-bottom:1px solid var(--border); margin-bottom:24px; flex-wrap:wrap; }
+.avatar { width:84px; height:84px; border-radius:50%; background:var(--brand); display:flex; align-items:center; justify-content:center; color:white; font-size:30px; font-weight:700; flex-shrink:0; }
+.header-info h1 { margin:0 0 4px 0; font-size:28px; font-weight:700; }
+.header-info .subtitle { color: var(--muted); font-size:14px; margin-bottom:10px; }
+.header-info .tagline { color: var(--muted); font-size:13px; font-style:italic; margin-bottom:12px; }
+.stats { display:flex; gap:24px; flex-wrap:wrap; }
+.stat { display:flex; flex-direction:column; }
+.stat-label { color:var(--muted); font-size:11px; text-transform:uppercase; letter-spacing:.5px; }
+.stat-value { font-size:17px; font-weight:600; margin-top:2px; }
+.stat-value.green { color: var(--green); } .stat-value.red { color: var(--red); }
+.section { margin-top:28px; }
+.section h2 { font-size:18px; margin:0 0 12px 0; }
+.section h2 .count { color: var(--muted); font-weight:400; font-size:13px; margin-left:6px; }
+.summary-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:20px; }
+.summary-card { background: var(--bg-soft); border:1px solid var(--border); border-radius:8px; padding:14px; }
+.summary-card h3 { margin:0 0 10px 0; font-size:14px; font-weight:600; }
+.summary-card ul { list-style:none; margin:0; padding:0; }
+.summary-card li { display:flex; gap:10px; align-items:center; padding:5px 0; border-bottom:1px solid var(--border); font-size:12px; }
+.summary-card li:last-child { border-bottom: none; }
+.ticker-pill { background: var(--accent); color:white; padding:2px 7px; border-radius:4px; font-size:11px; font-weight:600; font-family:monospace; min-width:58px; text-align:center; }
+.co { flex:1; color: var(--fg); }
+.act { font-size:11px; font-weight:500; }
+.act.green { color: var(--green); } .act.red { color: var(--red); }
+.val { color: var(--muted); font-size:11px; font-family:monospace; }
+table { width:100%; border-collapse:collapse; font-size:12.5px; }
+th, td { text-align:left; padding:8px 10px; border-bottom:1px solid var(--border); }
+th { background: var(--bg-soft); color: var(--muted); font-weight:500; font-size:10.5px; text-transform:uppercase; letter-spacing:.5px; }
+td.ticker { font-weight:700; font-family:monospace; }
+td.company { font-weight:500; }
+td.num { text-align:right; font-variant-numeric:tabular-nums; font-family:monospace; }
+td.pct { font-weight:600; }
+td.activity.green { color: var(--green); font-weight:500; }
+td.activity.red { color: var(--red); font-weight:500; }
+td.activity.neutral { color: var(--muted); }
+tr:hover { background: var(--bg-soft); }
+.opt-badge { display:inline-block; background:#fef3c7; color:#92400e; font-size:9px; padding:1px 5px; border-radius:3px; margin-left:4px; font-family:monospace; font-weight:600; vertical-align:middle; }
+.note { background:#f0f9ff; border-left:3px solid #0ea5e9; padding:10px 14px; border-radius:4px; color:#075985; font-size:12px; margin:12px 0; }
+.note.warn { background:#fef2f2; border-left-color:#dc2626; color:#7f1d1d; }
+.footer { margin-top:30px; padding-top:14px; border-top:1px solid var(--border); color: var(--muted); font-size:11px; line-height:1.6; }
+.footer a { color: var(--muted); }
+@media (max-width: 768px) {
+  .summary-grid { grid-template-columns: 1fr; }
+  th, td { padding: 5px 7px; font-size: 11.5px; }
+  .header { flex-direction: column; align-items: flex-start; }
+  .avatar { width:64px; height:64px; font-size:22px; }
+  .header-info h1 { font-size: 22px; }
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+<div class="topnav"><a href="index.html">Hub</a><a href="consensus.html">📊 Consensus</a><a href="duquesne.html">Stanley Druckenmiller</a><a href="berkshire.html">Warren Buffett</a><a href="pershing.html">Bill Ackman</a><a href="scion.html">Michael Burry</a><a href="appaloosa.html">David Tepper</a><a href="dme.html">David Einhorn (Greenlight)</a><a href="thirdpoint.html" class="active">Daniel Loeb</a><a href="tigerglobal.html">Chase Coleman</a><a href="soros.html">Soros šeima / George Soros</a></div>
+
+<div class="header">
+  <div class="avatar">DL</div>
+  <div class="header-info">
+    <h1>Third Point</h1>
+    <div class="subtitle">Daniel Loeb · 13F ataskaita 2026-03-31 (pateikta 2026-05-15)</div>
+    <div class="tagline">Aktyvistas, special situations, koncentruotas</div>
+    <div class="stats">
+      <div class="stat"><span class="stat-label">Ataskaita</span><span class="stat-value">2026-03-31</span></div>
+      <div class="stat"><span class="stat-label">Pozicijos</span><span class="stat-value">33</span></div>
+      <div class="stat"><span class="stat-label">Portfelis</span><span class="stat-value">$2.08B</span></div>
+      <div class="stat"><span class="stat-label">Naujos</span><span class="stat-value green">10</span></div>
+      <div class="stat"><span class="stat-label">Pridėjo</span><span class="stat-value green">1</span></div>
+      <div class="stat"><span class="stat-label">Sumažino</span><span class="stat-value red">16</span></div>
+      <div class="stat"><span class="stat-label">Pardavė</span><span class="stat-value red">21</span></div>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="summary-grid">
+  <div class="summary-card">
+    <h3>🟢 Didžiausi pirkimai (TOP 10)</h3>
+    <ul><li><span class="ticker-pill">META</span> <span class="co">Meta Platforms</span> <span class="act green">Nauja pozicija</span> <span class="val">$51.5M</span></li><li><span class="ticker-pill">GOOGL</span> <span class="co">Alphabet (Google)</span> <span class="act green">Nauja pozicija</span> <span class="val">$50.3M</span></li><li><span class="ticker-pill">GLD</span> <span class="co">Spdr Gold Tr</span> <span class="act green">Nauja pozicija</span> <span class="val">$40.9M</span></li><li><span class="ticker-pill">HUT</span> <span class="co">Hut 8 Corp</span> <span class="act green">Nauja pozicija</span> <span class="val">$40.8M</span></li><li><span class="ticker-pill">TDG</span> <span class="co">Transdigm Group Inc</span> <span class="act green">Nauja pozicija</span> <span class="val">$29.0M</span></li><li><span class="ticker-pill">KLAC</span> <span class="co">Kla Corp</span> <span class="act green">Nauja pozicija</span> <span class="val">$16.2M</span></li><li><span class="ticker-pill">LRCX</span> <span class="co">Lam Research Corp</span> <span class="act green">Nauja pozicija</span> <span class="val">$16.0M</span></li><li><span class="ticker-pill">—</span> <span class="co">Asml Hldg Nv</span> <span class="act green">Nauja pozicija</span> <span class="val">$15.8M</span></li><li><span class="ticker-pill">AVGO</span> <span class="co">Broadcom Inc</span> <span class="act green">Nauja pozicija</span> <span class="val">$15.5M</span></li><li><span class="ticker-pill">SMH</span> <span class="co">Vaneck ETF Trust</span> <span class="act green">Nauja pozicija</span> <span class="val">$15.3M</span></li></ul>
+  </div>
+  <div class="summary-card">
+    <h3>🔴 Didžiausi pardavimai (TOP 10)</h3>
+    <ul><li><span class="ticker-pill">PCG</span> <span class="co">Pg&e Corp</span> <span class="act red">Pardavė viską</span> <span class="val">~$551.2M</span></li><li><span class="ticker-pill">NVDA</span> <span class="co">Nvidia Corporation</span> <span class="act red">Sumažino 93.6%</span> <span class="val">~$550.2M</span></li><li><span class="ticker-pill">AMZN</span> <span class="co">Amazon</span> <span class="act red">Sumažino 10.4%</span> <span class="val">~$499.7M</span></li><li><span class="ticker-pill">MSFT</span> <span class="co">Microsoft</span> <span class="act red">Pardavė viską</span> <span class="val">~$447.3M</span></li><li><span class="ticker-pill">UNP</span> <span class="co">Union Pac Corp</span> <span class="act red">Sumažino 94.5%</span> <span class="val">~$418.7M</span></li><li><span class="ticker-pill">—</span> <span class="co">Crh Plc</span> <span class="act red">Sumažino 26.9%</span> <span class="val">~$324.5M</span></li><li><span class="ticker-pill">SGI</span> <span class="co">Somnigroup International Inc</span> <span class="act red">Sumažino 33.2%</span> <span class="val">~$303.6M</span></li><li><span class="ticker-pill">BN</span> <span class="co">Brookfield Corp</span> <span class="act red">Pardavė viską</span> <span class="val">~$284.5M</span></li><li><span class="ticker-pill">CASY</span> <span class="co">Caseys Gen Stores Inc</span> <span class="act red">Pardavė viską</span> <span class="val">~$251.5M</span></li><li><span class="ticker-pill">CSGP</span> <span class="co">Costar Group Inc</span> <span class="act red">Pardavė viską</span> <span class="val">~$212.8M</span></li></ul>
+  </div>
+</div>
+
+<div class="section">
+  <h2>Visos pozicijos <span class="count">(33 įmonės, $2.08B AUM)</span></h2>
+  <div style="overflow-x:auto;">
+  <table>
+    <thead><tr>
+      <th>Tickeris</th><th>Įmonė</th>
+      <th style="text-align:right;">Alokacija</th>
+      <th style="text-align:right;">Akcijų sk.</th>
+      <th>Veiksmas</th>
+      <th style="text-align:right;">Vertė</th>
+      <th style="text-align:right;">Kaina (2026-03-31)</th>
+    </tr></thead>
+    <tbody><tr><td class="ticker">AMZN</td><td class="company">Amazon</td><td class="num pct">19.40%</td><td class="num">1.94M</td><td class="activity red">Sumažino 10.4%</td><td class="num">$404.0M</td><td class="num">$208.27</td></tr><tr><td class="ticker">TDS</td><td class="company">Telephone & Data Sys Inc</td><td class="num pct">13.34%</td><td class="num">6.60M</td><td class="activity red">Sumažino 1.1%</td><td class="num">$277.9M</td><td class="num">$42.10</td></tr><tr><td class="ticker">—</td><td class="company">Crh Plc</td><td class="num pct">9.59%</td><td class="num">1.90M</td><td class="activity red">Sumažino 26.9%</td><td class="num">$199.7M</td><td class="num">$105.12</td></tr><tr><td class="ticker">SGI</td><td class="company">Somnigroup International Inc</td><td class="num pct">8.06%</td><td class="num">2.27M</td><td class="activity red">Sumažino 33.2%</td><td class="num">$167.9M</td><td class="num">$73.92</td></tr><tr><td class="ticker">CRS</td><td class="company">Carpenter Technology Corp</td><td class="num pct">5.87%</td><td class="num">310.0K</td><td class="activity red">Sumažino 60.5%</td><td class="num">$122.2M</td><td class="num">$394.15</td></tr><tr><td class="ticker">MTZ</td><td class="company">Mastec Inc</td><td class="num pct">4.94%</td><td class="num">320.0K</td><td class="activity red">Sumažino 65.4%</td><td class="num">$103.0M</td><td class="num">$321.74</td></tr><tr><td class="ticker">DHR</td><td class="company">Danaher Corp Del</td><td class="num pct">4.78%</td><td class="num">525.0K</td><td class="activity red">Sumažino 12.5%</td><td class="num">$99.5M</td><td class="num">$189.60</td></tr><tr><td class="ticker">TSM</td><td class="company">Taiwan Semiconductor Manufac</td><td class="num pct">4.46%</td><td class="num">275.0K</td><td class="activity red">Sumažino 35.3%</td><td class="num">$92.9M</td><td class="num">$337.95</td></tr><tr><td class="ticker">APG</td><td class="company">Api Group Corp</td><td class="num pct">3.95%</td><td class="num">2.03M</td><td class="activity red">Sumažino 32.3%</td><td class="num">$82.3M</td><td class="num">$40.52</td></tr><tr><td class="ticker">LYV</td><td class="company">Live Nation Entertainment In</td><td class="num pct">3.40%</td><td class="num">465.0K</td><td class="activity red">Sumažino 73.0%</td><td class="num">$70.9M</td><td class="num">$152.51</td></tr><tr><td class="ticker">META</td><td class="company">Meta Platforms</td><td class="num pct">2.47%</td><td class="num">90.0K</td><td class="activity green">Nauja pozicija</td><td class="num">$51.5M</td><td class="num">$572.13</td></tr><tr><td class="ticker">GOOGL</td><td class="company">Alphabet (Google)</td><td class="num pct">2.42%</td><td class="num">175.0K</td><td class="activity green">Nauja pozicija</td><td class="num">$50.3M</td><td class="num">$287.56</td></tr><tr><td class="ticker">GLD</td><td class="company">Spdr Gold Tr</td><td class="num pct">1.96%</td><td class="num">95.0K</td><td class="activity green">Nauja pozicija</td><td class="num">$40.9M</td><td class="num">$430.29</td></tr><tr><td class="ticker">HUT</td><td class="company">Hut 8 Corp</td><td class="num pct">1.96%</td><td class="num">869.6K</td><td class="activity green">Nauja pozicija</td><td class="num">$40.8M</td><td class="num">$46.91</td></tr><tr><td class="ticker">NVDA</td><td class="company">Nvidia Corporation</td><td class="num pct">1.59%</td><td class="num">190.0K</td><td class="activity red">Sumažino 93.6%</td><td class="num">$33.1M</td><td class="num">$174.40</td></tr><tr><td class="ticker">TDG</td><td class="company">Transdigm Group Inc</td><td class="num pct">1.39%</td><td class="num">25.0K</td><td class="activity green">Nauja pozicija</td><td class="num">$29.0M</td><td class="num">$1158.96</td></tr><tr><td class="ticker">NSC</td><td class="company">Norfolk Southn Corp</td><td class="num pct">1.38%</td><td class="num">100.0K</td><td class="activity red">Sumažino 89.7%</td><td class="num">$28.7M</td><td class="num">$287.00</td></tr><tr><td class="ticker">COF</td><td class="company">Capital One Finl Corp</td><td class="num pct">1.23%</td><td class="num">140.0K</td><td class="activity red">Sumažino 87.3%</td><td class="num">$25.5M</td><td class="num">$182.43</td></tr><tr><td class="ticker">UNP</td><td class="company">Union Pac Corp</td><td class="num pct">1.16%</td><td class="num">100.0K</td><td class="activity red">Sumažino 94.5%</td><td class="num">$24.3M</td><td class="num">$242.62</td></tr><tr><td class="ticker">SRTA</td><td class="company">Strata Critical Medical Inc</td><td class="num pct">1.00%</td><td class="num">5.00M</td><td class="activity neutral">Laiko</td><td class="num">$20.9M</td><td class="num">$4.18</td></tr><tr><td class="ticker">KLAC</td><td class="company">Kla Corp</td><td class="num pct">0.78%</td><td class="num">11.0K</td><td class="activity green">Nauja pozicija</td><td class="num">$16.2M</td><td class="num">$1472.41</td></tr><tr><td class="ticker">LRCX</td><td class="company">Lam Research Corp</td><td class="num pct">0.77%</td><td class="num">75.0K</td><td class="activity green">Nauja pozicija</td><td class="num">$16.0M</td><td class="num">$213.66</td></tr><tr><td class="ticker">—</td><td class="company">Asml Hldg Nv</td><td class="num pct">0.76%</td><td class="num">12.0K</td><td class="activity green">Nauja pozicija</td><td class="num">$15.8M</td><td class="num">$1320.83</td></tr><tr><td class="ticker">AVGO</td><td class="company">Broadcom Inc</td><td class="num pct">0.74%</td><td class="num">50.0K</td><td class="activity green">Nauja pozicija</td><td class="num">$15.5M</td><td class="num">$309.51</td></tr><tr><td class="ticker">SMH</td><td class="company">Vaneck ETF Trust</td><td class="num pct">0.74%</td><td class="num">40.0K</td><td class="activity green">Nauja pozicija</td><td class="num">$15.3M</td><td class="num">$383.40</td></tr><tr><td class="ticker">—</td><td class="company">Sharkninja Inc</td><td class="num pct">0.66%</td><td class="num">130.5K</td><td class="activity red">Sumažino 89.1%</td><td class="num">$13.8M</td><td class="num">$105.90</td></tr><tr><td class="ticker">HTZWW</td><td class="company">Hertz Global Hldgs Inc</td><td class="num pct">0.43%</td><td class="num">3.97M</td><td class="activity neutral">Laiko</td><td class="num">$9.1M</td><td class="num">$2.28</td></tr><tr><td class="ticker">SPRY</td><td class="company">Ars Pharmaceuticals Inc</td><td class="num pct">0.39%</td><td class="num">1.00M</td><td class="activity green">Pridėjo 79.8%</td><td class="num">$8.0M</td><td class="num">$8.03</td></tr><tr><td class="ticker">AUR</td><td class="company">Aurora Innovation Inc</td><td class="num pct">0.20%</td><td class="num">1.03M</td><td class="activity neutral">Laiko</td><td class="num">$4.3M</td><td class="num">$4.12</td></tr><tr><td class="ticker">FLYX</td><td class="company">Flyexclusive Inc</td><td class="num pct">0.11%</td><td class="num">1.02M</td><td class="activity neutral">Laiko</td><td class="num">$2.3M</td><td class="num">$2.26</td></tr><tr><td class="ticker">CTEV</td><td class="company">Claritev Corporation</td><td class="num pct">0.03%</td><td class="num">44.0K</td><td class="activity red">Sumažino 69.7%</td><td class="num">$719.0K</td><td class="num">$16.34</td></tr><tr><td class="ticker">AUROW</td><td class="company">Aurora Innovation Inc</td><td class="num pct">0.02%</td><td class="num">1.83M</td><td class="activity neutral">Laiko</td><td class="num">$365.2K</td><td class="num">$0.20</td></tr><tr><td class="ticker">FLYX/WS</td><td class="company">Flyexclusive Inc</td><td class="num pct">0.00%</td><td class="num">367.5K</td><td class="activity neutral">Laiko</td><td class="num">$88.2K</td><td class="num">$0.24</td></tr></tbody>
+  </table></div>
+</div>
+
+<div class="section">
+  <h2>❌ Pilnai parduotos pozicijos <span class="count">(21 įmonės)</span></h2>
+  <div style="overflow-x:auto;">
+  <table>
+    <thead><tr>
+      <th>Tickeris</th><th>Įmonė</th>
+      <th style="text-align:right;">Akcijų sk. (prieš)</th>
+      <th style="text-align:right;">Vertė 2025-12-31</th>
+    </tr></thead>
+    <tbody><tr><td class="ticker">PCG</td><td class="company">Pg&e Corp</td><td class="num">34.30M</td><td class="num">$551.2M</td></tr><tr><td class="ticker">MSFT</td><td class="company">Microsoft</td><td class="num">925.0K</td><td class="num">$447.3M</td></tr><tr><td class="ticker">BN</td><td class="company">Brookfield Corp</td><td class="num">6.20M</td><td class="num">$284.5M</td></tr><tr><td class="ticker">CASY</td><td class="company">Caseys Gen Stores Inc</td><td class="num">455.0K</td><td class="num">$251.5M</td></tr><tr><td class="ticker">CSGP</td><td class="company">Costar Group Inc</td><td class="num">3.17M</td><td class="num">$212.8M</td></tr><tr><td class="ticker">RKT</td><td class="company">Rocket Cos Inc</td><td class="num">9.52M</td><td class="num">$184.2M</td></tr><tr><td class="ticker">LPLA</td><td class="company">Lpl Finl Hldgs Inc</td><td class="num">510.0K</td><td class="num">$182.2M</td></tr><tr><td class="ticker">CMG</td><td class="company">Chipotle Mexican Grill</td><td class="num">4.72M</td><td class="num">$174.8M</td></tr><tr><td class="ticker">CEG</td><td class="company">Constellation Energy Corp</td><td class="num">475.0K</td><td class="num">$167.8M</td></tr><tr><td class="ticker">VST</td><td class="company">Vistra Corp</td><td class="num">1.00M</td><td class="num">$162.1M</td></tr><tr><td class="ticker">BABA</td><td class="company">Alibaba Group</td><td class="num">825.0K</td><td class="num">$120.9M</td></tr><tr><td class="ticker">FIX</td><td class="company">Comfort Sys Usa Inc</td><td class="num">105.0K</td><td class="num">$98.0M</td></tr><tr><td class="ticker">—</td><td class="company">Spotify Technology S A</td><td class="num">100.0K</td><td class="num">$58.1M</td></tr><tr><td class="ticker">KVUE</td><td class="company">Kenvue Inc</td><td class="num">3.25M</td><td class="num">$56.1M</td></tr><tr><td class="ticker">PGR</td><td class="company">Progressive Corp</td><td class="num">220.0K</td><td class="num">$50.1M</td></tr><tr><td class="ticker">TMO</td><td class="company">Thermo Fisher Scientific Inc</td><td class="num">50.0K</td><td class="num">$29.0M</td></tr><tr><td class="ticker">—</td><td class="company">Wix Com Ltd</td><td class="num">225.0K</td><td class="num">$23.4M</td></tr><tr><td class="ticker">CSX</td><td class="company">Csx Corp</td><td class="num">500.0K</td><td class="num">$18.1M</td></tr><tr><td class="ticker">PCG 4.25 12/01/27</td><td class="company">Pg&e Corp</td><td class="num">10.00M</td><td class="num">$10.3M</td></tr><tr><td class="ticker">PCG 6 12/01/27 A</td><td class="company">Pg&e Corp</td><td class="num">140.0K</td><td class="num">$5.7M</td></tr><tr><td class="ticker">BHC</td><td class="company">Bausch Health Cos Inc</td><td class="num">350.0K</td><td class="num">$2.4M</td></tr></tbody>
+  </table></div>
+</div>
+
+<div class="section">
+  <h2>📊 Pasirinkimo sandoriai (options) <span class="count">(0 pozicijos)</span></h2>
+  <div style="overflow-x:auto;">
+  <table>
+    <thead><tr><th>Tickeris</th><th>Įmonė</th>
+      <th style="text-align:right;">Call vertė</th>
+      <th style="text-align:right;">Put vertė</th>
+    </tr></thead>
+    <tbody><tr><td colspan="4" style="color:var(--muted);font-style:italic;text-align:center;padding:14px">Pasirinkimo sandorių (options) nepateikta</td></tr></tbody>
+  </table></div>
+</div>
+
+<div class="footer">
+  <strong>Šaltinis:</strong> SEC EDGAR · CIK 0001040273 · 13F-HR · Third Point LLC<br>
+  <strong>Originalus filing:</strong> <a href="https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0001040273&type=13F-HR&dateb=&owner=include&count=10">SEC EDGAR</a><br>
+  <strong>Generuota:</strong> 2026-05-15 · Lyginama su praeitu ketvirčiu (2025-12-31).<br><br>
+  <em>13F ataskaita rodo TIK long pozicijas JAV vertybiniuose popieriuose. Short pozicijos, fiksuoto pajamingumo, ne-JAV akcijos ir privatūs investavimai į ataskaitą neįtraukti.</em>
+</div>
+
+</div>
+</body>
+</html>

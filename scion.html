@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="lt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scion Asset Management — 2025-09-30 13F</title>
+<style>:root { --brand: #7c2d12; }
+:root {
+  --bg: #ffffff; --fg: #1a1a1a; --muted: #6b7280; --border: #e5e7eb;
+  --green: #16a34a; --red: #dc2626; --neutral: #6b7280;
+  --bg-soft: #f9fafb; --accent: var(--brand);
+}
+* { box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+       background: var(--bg); color: var(--fg); margin: 0; padding: 24px 16px; line-height: 1.45; }
+.container { max-width: 1280px; margin: 0 auto; }
+.topnav { display:flex; gap:12px; flex-wrap:wrap; padding-bottom:14px; margin-bottom:18px;
+          border-bottom: 1px solid var(--border); font-size:13px; }
+.topnav a { text-decoration:none; color:var(--muted); padding:4px 10px; border-radius:5px; }
+.topnav a:hover { background: var(--bg-soft); color: var(--fg); }
+.topnav a.active { background: var(--accent); color: white; }
+.header { display:flex; align-items:center; gap:20px; padding:18px 0; border-bottom:1px solid var(--border); margin-bottom:24px; flex-wrap:wrap; }
+.avatar { width:84px; height:84px; border-radius:50%; background:var(--brand); display:flex; align-items:center; justify-content:center; color:white; font-size:30px; font-weight:700; flex-shrink:0; }
+.header-info h1 { margin:0 0 4px 0; font-size:28px; font-weight:700; }
+.header-info .subtitle { color: var(--muted); font-size:14px; margin-bottom:10px; }
+.header-info .tagline { color: var(--muted); font-size:13px; font-style:italic; margin-bottom:12px; }
+.stats { display:flex; gap:24px; flex-wrap:wrap; }
+.stat { display:flex; flex-direction:column; }
+.stat-label { color:var(--muted); font-size:11px; text-transform:uppercase; letter-spacing:.5px; }
+.stat-value { font-size:17px; font-weight:600; margin-top:2px; }
+.stat-value.green { color: var(--green); } .stat-value.red { color: var(--red); }
+.section { margin-top:28px; }
+.section h2 { font-size:18px; margin:0 0 12px 0; }
+.section h2 .count { color: var(--muted); font-weight:400; font-size:13px; margin-left:6px; }
+.summary-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:20px; }
+.summary-card { background: var(--bg-soft); border:1px solid var(--border); border-radius:8px; padding:14px; }
+.summary-card h3 { margin:0 0 10px 0; font-size:14px; font-weight:600; }
+.summary-card ul { list-style:none; margin:0; padding:0; }
+.summary-card li { display:flex; gap:10px; align-items:center; padding:5px 0; border-bottom:1px solid var(--border); font-size:12px; }
+.summary-card li:last-child { border-bottom: none; }
+.ticker-pill { background: var(--accent); color:white; padding:2px 7px; border-radius:4px; font-size:11px; font-weight:600; font-family:monospace; min-width:58px; text-align:center; }
+.co { flex:1; color: var(--fg); }
+.act { font-size:11px; font-weight:500; }
+.act.green { color: var(--green); } .act.red { color: var(--red); }
+.val { color: var(--muted); font-size:11px; font-family:monospace; }
+table { width:100%; border-collapse:collapse; font-size:12.5px; }
+th, td { text-align:left; padding:8px 10px; border-bottom:1px solid var(--border); }
+th { background: var(--bg-soft); color: var(--muted); font-weight:500; font-size:10.5px; text-transform:uppercase; letter-spacing:.5px; }
+td.ticker { font-weight:700; font-family:monospace; }
+td.company { font-weight:500; }
+td.num { text-align:right; font-variant-numeric:tabular-nums; font-family:monospace; }
+td.pct { font-weight:600; }
+td.activity.green { color: var(--green); font-weight:500; }
+td.activity.red { color: var(--red); font-weight:500; }
+td.activity.neutral { color: var(--muted); }
+tr:hover { background: var(--bg-soft); }
+.opt-badge { display:inline-block; background:#fef3c7; color:#92400e; font-size:9px; padding:1px 5px; border-radius:3px; margin-left:4px; font-family:monospace; font-weight:600; vertical-align:middle; }
+.note { background:#f0f9ff; border-left:3px solid #0ea5e9; padding:10px 14px; border-radius:4px; color:#075985; font-size:12px; margin:12px 0; }
+.note.warn { background:#fef2f2; border-left-color:#dc2626; color:#7f1d1d; }
+.footer { margin-top:30px; padding-top:14px; border-top:1px solid var(--border); color: var(--muted); font-size:11px; line-height:1.6; }
+.footer a { color: var(--muted); }
+@media (max-width: 768px) {
+  .summary-grid { grid-template-columns: 1fr; }
+  th, td { padding: 5px 7px; font-size: 11.5px; }
+  .header { flex-direction: column; align-items: flex-start; }
+  .avatar { width:64px; height:64px; font-size:22px; }
+  .header-info h1 { font-size: 22px; }
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+<div class="topnav"><a href="index.html">Hub</a><a href="consensus.html">📊 Consensus</a><a href="duquesne.html">Stanley Druckenmiller</a><a href="berkshire.html">Warren Buffett</a><a href="pershing.html">Bill Ackman</a><a href="scion.html" class="active">Michael Burry</a><a href="appaloosa.html">David Tepper</a><a href="dme.html">David Einhorn (Greenlight)</a><a href="thirdpoint.html">Daniel Loeb</a><a href="tigerglobal.html">Chase Coleman</a><a href="soros.html">Soros šeima / George Soros</a></div>
+
+<div class="header">
+  <div class="avatar">MB</div>
+  <div class="header-info">
+    <h1>Scion Asset Management</h1>
+    <div class="subtitle">Michael Burry · 13F ataskaita 2025-09-30 (pateikta 2025-11-03)</div>
+    <div class="tagline">"The Big Short" autorius, kontrarinis stilius, dažnai puts</div>
+    <div class="stats">
+      <div class="stat"><span class="stat-label">Ataskaita</span><span class="stat-value">2025-09-30</span></div>
+      <div class="stat"><span class="stat-label">Pozicijos</span><span class="stat-value">4</span></div>
+      <div class="stat"><span class="stat-label">Portfelis</span><span class="stat-value">$68.1M</span></div>
+      <div class="stat"><span class="stat-label">Naujos</span><span class="stat-value green">3</span></div>
+      <div class="stat"><span class="stat-label">Pridėjo</span><span class="stat-value green">1</span></div>
+      <div class="stat"><span class="stat-label">Sumažino</span><span class="stat-value red">0</span></div>
+      <div class="stat"><span class="stat-label">Pardavė</span><span class="stat-value red">5</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="note warn"><strong>Pastaba:</strong> Naujesnio 13F nėra. Vėliausia prieinama ataskaita: <strong>2025-09-30</strong> (pateikta 2025-11-03). Burry/Scion neturi pareigos teikti 13F kai portfelis žemiau $100M slenksčio.</div>
+
+<div class="summary-grid">
+  <div class="summary-card">
+    <h3>🟢 Didžiausi pirkimai (TOP 10)</h3>
+    <ul><li><span class="ticker-pill">MOH</span> <span class="co">Molina Healthcare Inc</span> <span class="act green">Nauja pozicija</span> <span class="val">$23.9M</span></li><li><span class="ticker-pill">LULU</span> <span class="co">Lululemon Athletica Inc</span> <span class="act green">Pridėjo 100.0%</span> <span class="val">$17.8M</span></li><li><span class="ticker-pill">SLM</span> <span class="co">Slm Corp</span> <span class="act green">Nauja pozicija</span> <span class="val">$13.3M</span></li><li><span class="ticker-pill">BRKR 6.375 09/01/28</span> <span class="co">Bruker Corp</span> <span class="act green">Nauja pozicija</span> <span class="val">$13.1M</span></li></ul>
+  </div>
+  <div class="summary-card">
+    <h3>🔴 Didžiausi pardavimai (TOP 10)</h3>
+    <ul><li><span class="ticker-pill">EL</span> <span class="co">Lauder Estee Cos Inc</span> <span class="act red">Pardavė viską</span> <span class="val">~$12.1M</span></li><li><span class="ticker-pill">BRKR</span> <span class="co">Bruker Corp</span> <span class="act red">Pardavė viską</span> <span class="val">~$10.3M</span></li><li><span class="ticker-pill">REGN</span> <span class="co">Regeneron Pharmaceuticals</span> <span class="act red">Pardavė viską</span> <span class="val">~$7.9M</span></li><li><span class="ticker-pill">MELI</span> <span class="co">MercadoLibre</span> <span class="act red">Pardavė viską</span> <span class="val">~$7.8M</span></li><li><span class="ticker-pill">UNH</span> <span class="co">Unitedhealth Group Inc</span> <span class="act red">Pardavė viską</span> <span class="val">~$6.2M</span></li></ul>
+  </div>
+</div>
+
+<div class="section">
+  <h2>Visos pozicijos <span class="count">(4 įmonės, $68.1M AUM)</span></h2>
+  <div style="overflow-x:auto;">
+  <table>
+    <thead><tr>
+      <th>Tickeris</th><th>Įmonė</th>
+      <th style="text-align:right;">Alokacija</th>
+      <th style="text-align:right;">Akcijų sk.</th>
+      <th>Veiksmas</th>
+      <th style="text-align:right;">Vertė</th>
+      <th style="text-align:right;">Kaina (2025-09-30)</th>
+    </tr></thead>
+    <tbody><tr><td class="ticker">MOH</td><td class="company">Molina Healthcare Inc</td><td class="num pct">35.11%</td><td class="num">125.0K</td><td class="activity green">Nauja pozicija</td><td class="num">$23.9M</td><td class="num">$191.36</td></tr><tr><td class="ticker">LULU</td><td class="company">Lululemon Athletica Inc</td><td class="num pct">26.11%</td><td class="num">100.0K</td><td class="activity green">Pridėjo 100.0%</td><td class="num">$17.8M</td><td class="num">$177.93</td></tr><tr><td class="ticker">SLM</td><td class="company">Slm Corp</td><td class="num pct">19.50%</td><td class="num">480.1K</td><td class="activity green">Nauja pozicija</td><td class="num">$13.3M</td><td class="num">$27.68</td></tr><tr><td class="ticker">BRKR 6.375 09/01/28</td><td class="company">Bruker Corp</td><td class="num pct">19.28%</td><td class="num">48.3K</td><td class="activity green">Nauja pozicija</td><td class="num">$13.1M</td><td class="num">$271.80</td></tr></tbody>
+  </table></div>
+</div>
+
+<div class="section">
+  <h2>❌ Pilnai parduotos pozicijos <span class="count">(5 įmonės)</span></h2>
+  <div style="overflow-x:auto;">
+  <table>
+    <thead><tr>
+      <th>Tickeris</th><th>Įmonė</th>
+      <th style="text-align:right;">Akcijų sk. (prieš)</th>
+      <th style="text-align:right;">Vertė 2025-06-30</th>
+    </tr></thead>
+    <tbody><tr><td class="ticker">EL</td><td class="company">Lauder Estee Cos Inc</td><td class="num">150.0K</td><td class="num">$12.1M</td></tr><tr><td class="ticker">BRKR</td><td class="company">Bruker Corp</td><td class="num">250.0K</td><td class="num">$10.3M</td></tr><tr><td class="ticker">REGN</td><td class="company">Regeneron Pharmaceuticals</td><td class="num">15.0K</td><td class="num">$7.9M</td></tr><tr><td class="ticker">MELI</td><td class="company">MercadoLibre</td><td class="num">3.0K</td><td class="num">$7.8M</td></tr><tr><td class="ticker">UNH</td><td class="company">Unitedhealth Group Inc</td><td class="num">20.0K</td><td class="num">$6.2M</td></tr></tbody>
+  </table></div>
+</div>
+
+<div class="section">
+  <h2>📊 Pasirinkimo sandoriai (options) <span class="count">(4 pozicijos)</span></h2>
+  <div style="overflow-x:auto;">
+  <table>
+    <thead><tr><th>Tickeris</th><th>Įmonė</th>
+      <th style="text-align:right;">Call vertė</th>
+      <th style="text-align:right;">Put vertė</th>
+    </tr></thead>
+    <tbody><tr><td class="ticker">PLTR</td><td class="company">Palantir Technologies Inc</td><td class="num">$0</td><td class="num">$912.1M</td></tr><tr><td class="ticker">NVDA</td><td class="company">Nvidia Corporation</td><td class="num">$0</td><td class="num">$186.6M</td></tr><tr><td class="ticker">PFE</td><td class="company">Pfizer</td><td class="num">$152.9M</td><td class="num">$0</td></tr><tr><td class="ticker">HAL</td><td class="company">Halliburton Co</td><td class="num">$61.5M</td><td class="num">$0</td></tr></tbody>
+  </table></div>
+</div>
+
+<div class="footer">
+  <strong>Šaltinis:</strong> SEC EDGAR · CIK 0001649339 · 13F-HR · Scion Asset Management, LLC<br>
+  <strong>Originalus filing:</strong> <a href="https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0001649339&type=13F-HR&dateb=&owner=include&count=10">SEC EDGAR</a><br>
+  <strong>Generuota:</strong> 2026-05-15 · Lyginama su praeitu ketvirčiu (2025-06-30).<br><br>
+  <em>13F ataskaita rodo TIK long pozicijas JAV vertybiniuose popieriuose. Short pozicijos, fiksuoto pajamingumo, ne-JAV akcijos ir privatūs investavimai į ataskaitą neįtraukti.</em>
+</div>
+
+</div>
+</body>
+</html>
