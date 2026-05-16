@@ -73,6 +73,16 @@ tr:hover { background: var(--bg-soft); }
 .cta { display:flex; gap:12px; justify-content:center; margin-top:24px; flex-wrap:wrap; }
 .cta a { background:var(--accent); color:white; padding:10px 20px; border-radius:6px; text-decoration:none; font-weight:600; font-size:14px; }
 .cta a.outline { background:white; color:var(--accent); border:1px solid var(--accent); }
+.quick-search { max-width:640px; margin:24px auto; padding:20px; background:var(--bg-soft); border:1px solid var(--border); border-radius:12px; }
+.quick-search form { display:flex; gap:8px; }
+.quick-search input { flex:1; padding:14px 18px; font-size:16px; border:2px solid var(--border); border-radius:8px; outline:none; font-family:monospace; font-weight:600; }
+.quick-search input:focus { border-color:var(--accent); }
+.quick-search button { padding:14px 24px; background:var(--accent); color:white; border:none; border-radius:8px; font-weight:600; cursor:pointer; font-size:14px; }
+.quick-search button:hover { opacity:0.9; }
+.popular-quick { margin-top:12px; text-align:center; font-size:12px; }
+.popular-quick span { color:var(--muted); margin-right:6px; }
+.popular-quick a { display:inline-block; background:white; border:1px solid var(--border); padding:4px 10px; border-radius:14px; font-family:monospace; font-size:11px; text-decoration:none; color:var(--fg); margin:3px; }
+.popular-quick a:hover { background:var(--accent); color:white; border-color:var(--accent); }
 .investor-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(310px,1fr)); gap:16px; margin-top:30px; }
 .investor-card { display:block; border:1px solid var(--border); border-radius:10px; padding:18px; text-decoration:none; color:var(--fg); transition:all .15s; background:white; }
 .investor-card:hover { box-shadow:0 6px 20px rgba(0,0,0,.08); transform:translateY(-2px); }
@@ -96,16 +106,28 @@ tr:hover { background: var(--bg-soft); }
 <body>
 <div class="container">
 
-<div class="topnav"><a href="index.html" class="active">Hub</a><a href="consensus.html">📊 Consensus</a><a href="duquesne.html">Stanley Druckenmiller</a><a href="berkshire.html">Warren Buffett</a><a href="pershing.html">Bill Ackman</a><a href="scion.html">Michael Burry</a><a href="appaloosa.html">David Tepper</a><a href="dme.html">David Einhorn (Greenlight)</a><a href="thirdpoint.html">Daniel Loeb</a><a href="tigerglobal.html">Chase Coleman</a><a href="soros.html">Soros šeima / George Soros</a></div>
+<div class="topnav"><a href="index.html" class="active">Hub</a><a href="consensus.html">📊 Consensus</a><a href="search.html">🔍 Paieška</a><a href="duquesne.html">Stanley Druckenmiller</a><a href="berkshire.html">Warren Buffett</a><a href="pershing.html">Bill Ackman</a><a href="scion.html">Michael Burry</a><a href="appaloosa.html">David Tepper</a><a href="dme.html">David Einhorn (Greenlight)</a><a href="thirdpoint.html">Daniel Loeb</a><a href="tigerglobal.html">Chase Coleman</a><a href="soros.html">Soros šeima / George Soros</a></div>
 
 <div class="hero">
   <h1>📊 Top investuotojų 13F dashboard'as</h1>
-  <p>Q1 2026 (2026-03-31) atskaitos. 9 garsiausi pasaulio investuotojai. Detali kiekvieno portfelio analizė + bendras consensus dashboard'as su sutapusiais pirkimais ir pardavimais.</p>
-  <div class="cta">
-    <a href="consensus.html">📊 Žiūrėti Consensus</a>
-    <a href="duquesne.html" class="outline">Druckenmiller</a>
-    <a href="berkshire.html" class="outline">Buffett</a>
+  <p>Q1 2026 (2026-03-31) atskaitos. 9 garsiausi pasaulio investuotojai. Detali kiekvieno portfelio analizė + consensus dashboard'as su sutapusiais pirkimais ir pardavimais + paieška per visus portfelius.</p>
+</div>
+
+<div class="quick-search">
+  <h2 style="margin:0 0 12px 0;font-size:18px;text-align:center">🔍 Greita paieška - kas laiko šią akciją?</h2>
+  <form onsubmit="event.preventDefault(); const v=this.querySelector('input').value.trim(); if(v) location.href='search.html?q='+encodeURIComponent(v);">
+    <input type="text" placeholder="Pvz: AMZN, GOOGL, Tesla, Natera..." autocomplete="off">
+    <button type="submit">Ieškoti</button>
+  </form>
+  <div class="popular-quick">
+    <span>Populiarūs:</span>
+    <a href="search.html?q=AMZN">AMZN</a><a href="search.html?q=GOOGL">GOOGL</a><a href="search.html?q=TSM">TSM</a><a href="search.html?q=META">META</a><a href="search.html?q=MSFT">MSFT</a><a href="search.html?q=NVDA">NVDA</a><a href="search.html?q=UBER">UBER</a><a href="search.html?q=AVGO">AVGO</a><a href="search.html?q=NTRA">NTRA</a>
   </div>
+</div>
+
+<div class="cta" style="margin-top:24px">
+  <a href="consensus.html">📊 Žiūrėti Consensus</a>
+  <a href="search.html" class="outline">🔍 Pilna paieška</a>
 </div>
 
 <div class="investor-grid">

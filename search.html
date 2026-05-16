@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="lt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🔍 Paieška - 13F portfeliuose</title>
+<style>
+:root { --bg:#fff; --fg:#1a1a1a; --muted:#6b7280; --border:#e5e7eb; --green:#16a34a; --red:#dc2626; --bg-soft:#f9fafb; --accent:#0f172a; }
+* { box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+       background: var(--bg); color: var(--fg); margin: 0; padding: 24px 16px; line-height: 1.45; }
+.container { max-width: 1100px; margin: 0 auto; }
+.topnav { display:flex; gap:12px; flex-wrap:wrap; padding-bottom:14px; margin-bottom:18px; border-bottom: 1px solid var(--border); font-size:13px; }
+.topnav a { text-decoration:none; color:var(--muted); padding:4px 10px; border-radius:5px; }
+.topnav a:hover { background: var(--bg-soft); color: var(--fg); }
+.topnav a.active { background: var(--accent); color: white; }
+
+.hero { padding: 30px 0 10px; text-align: center; }
+.hero h1 { margin: 0 0 8px; font-size: 32px; }
+.hero p { color: var(--muted); margin: 0 auto; max-width: 600px; font-size: 14px; }
+
+.search-box { margin: 30px auto; max-width: 600px; position: relative; }
+.search-box input { width: 100%; padding: 18px 56px 18px 22px; font-size: 18px; border: 2px solid var(--border); border-radius: 12px; outline: none; transition: all 0.15s; font-family: monospace; font-weight: 600; }
+.search-box input:focus { border-color: var(--accent); box-shadow: 0 0 0 4px rgba(15,23,42,0.08); }
+.search-box::after { content: "🔍"; position: absolute; right: 22px; top: 50%; transform: translateY(-50%); font-size: 22px; pointer-events: none; opacity: 0.5; }
+
+.suggestions { margin: 14px auto; max-width: 600px; text-align: center; }
+.suggestions span { color: var(--muted); font-size: 12px; margin-right: 6px; }
+.suggestions button { background: var(--bg-soft); border: 1px solid var(--border); color: var(--fg); padding: 4px 10px; border-radius: 14px; font-size: 12px; font-family: monospace; cursor: pointer; margin: 3px; }
+.suggestions button:hover { background: var(--accent); color: white; border-color: var(--accent); }
+
+.results { margin-top: 30px; }
+.summary-bar { background: var(--bg-soft); border: 1px solid var(--border); border-radius: 8px; padding: 16px 20px; margin-bottom: 20px; display: flex; gap: 24px; flex-wrap: wrap; align-items: center; }
+.summary-bar.empty { display: none; }
+.summary-bar.no-match { background: #fef2f2; border-color: #fca5a5; color: #7f1d1d; }
+.summary-bar h2 { margin: 0; font-size: 22px; }
+.summary-bar .stat { display: flex; flex-direction: column; }
+.summary-bar .stat-label { color: var(--muted); font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; }
+.summary-bar .stat-value { font-weight: 600; font-size: 18px; }
+
+.investor-card { background: white; border: 1px solid var(--border); border-radius: 8px; padding: 16px; margin-bottom: 12px; transition: all 0.15s; }
+.investor-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
+.investor-header { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+.investor-avatar { width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: 14px; flex-shrink: 0; }
+.investor-name { font-weight: 600; font-size: 15px; }
+.investor-manager { color: var(--muted); font-size: 12px; }
+.investor-link { margin-left: auto; }
+.investor-link a { color: var(--accent); text-decoration: none; font-size: 12px; padding: 4px 10px; border: 1px solid var(--border); border-radius: 4px; }
+.investor-link a:hover { background: var(--accent); color: white; }
+
+.holding-details { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 14px; padding-top: 12px; border-top: 1px solid var(--border); }
+.detail { display: flex; flex-direction: column; }
+.detail-label { color: var(--muted); font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 2px; }
+.detail-value { font-weight: 600; font-size: 14px; font-family: monospace; }
+.detail-value.green { color: var(--green); } .detail-value.red { color: var(--red); }
+.activity-badge { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 11px; font-weight: 500; }
+.activity-badge.new, .activity-badge.added { background: #dcfce7; color: #166534; }
+.activity-badge.reduced { background: #fee2e2; color: #991b1b; }
+.activity-badge.held { background: var(--bg-soft); color: var(--muted); }
+
+.welcome { text-align: center; padding: 40px 20px; color: var(--muted); }
+.welcome h2 { color: var(--fg); margin-bottom: 12px; }
+.note { background: #f0f9ff; border-left: 3px solid #0ea5e9; padding: 10px 14px; border-radius: 4px; color: #075985; font-size: 12px; margin: 14px 0; }
+.footer { margin-top: 40px; padding-top: 16px; border-top: 1px solid var(--border); color: var(--muted); font-size: 11px; text-align: center; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<div class="topnav"><a href="index.html">Hub</a><a href="consensus.html">📊 Consensus</a><a href="search.html" class="active">🔍 Paieška</a><a href="duquesne.html">Stanley Druckenmiller</a><a href="berkshire.html">Warren Buffett</a><a href="pershing.html">Bill Ackman</a><a href="scion.html">Michael Burry</a><a href="appaloosa.html">David Tepper</a><a href="dme.html">David Einhorn (Greenlight)</a><a href="thirdpoint.html">Daniel Loeb</a><a href="tigerglobal.html">Chase Coleman</a><a href="soros.html">Soros šeima / George Soros</a></div>
+
+<div class="hero">
+  <h1>🔍 Paieška - kas ką laiko</h1>
+  <p>Įrašyk tickerį ar įmonės pavadinimą - iškart pamatysi kuris iš 9 top investuotojų jį laiko Q1 2026 portfelyje.</p>
+</div>
+
+<div class="search-box">
+  <input id="q" type="text" placeholder="Pvz: AMZN, GOOGL, Tesla, Natera..." autocomplete="off" autofocus>
+</div>
+
+<div class="suggestions">
+  <span>Populiarūs:</span>
+  <button onclick="quickSearch('AMZN')">AMZN</button><button onclick="quickSearch('GOOGL')">GOOGL</button><button onclick="quickSearch('TSM')">TSM</button><button onclick="quickSearch('META')">META</button><button onclick="quickSearch('MSFT')">MSFT</button><button onclick="quickSearch('AAPL')">AAPL</button><button onclick="quickSearch('NVDA')">NVDA</button><button onclick="quickSearch('UBER')">UBER</button><button onclick="quickSearch('AVGO')">AVGO</button><button onclick="quickSearch('BRK-B')">BRK-B</button><button onclick="quickSearch('KO')">KO</button><button onclick="quickSearch('BAC')">BAC</button><button onclick="quickSearch('OXY')">OXY</button><button onclick="quickSearch('NTRA')">NTRA</button>
+</div>
+
+<div id="summary-bar" class="summary-bar empty"></div>
+
+<div id="results" class="results"></div>
+
+<div class="footer">
+  Šaltinis: SEC EDGAR 13F-HR Q1 2026 (2026-03-31) · Investuotojai: Buffett, Druckenmiller, Ackman, Burry, Tepper, Einhorn, Loeb, Coleman, Soros<br>
+  Paieška veikia naršyklėje per JS - duomenys užkraunami iš holdings.json
+</div>
+
+</div>
+
+<script>
+let HOLDINGS = [];
+let CURRENT_QUERY = "";
+
+async function loadData() {
+  const r = await fetch("holdings.json");
+  HOLDINGS = await r.json();
+}
+
+function fmtMoney(v) {
+  if (v >= 1e9) return "$" + (v/1e9).toFixed(2) + "B";
+  if (v >= 1e6) return "$" + (v/1e6).toFixed(1) + "M";
+  if (v >= 1e3) return "$" + (v/1e3).toFixed(1) + "K";
+  return "$" + v.toFixed(0);
+}
+
+function fmtShares(s) {
+  if (s >= 1e6) return (s/1e6).toFixed(2) + "M";
+  if (s >= 1e3) return (s/1e3).toFixed(1) + "K";
+  return s.toLocaleString();
+}
+
+function activityClass(kind) {
+  return kind === "new" || kind === "added" ? "added" : (kind === "reduced" ? "reduced" : "held");
+}
+
+function search(query) {
+  CURRENT_QUERY = query.trim().toUpperCase();
+  const root = document.getElementById("results");
+  const summary = document.getElementById("summary-bar");
+
+  if (!CURRENT_QUERY) {
+    summary.className = "summary-bar empty";
+    root.innerHTML = `
+      <div class="welcome">
+        <h2>👆 Įvesk tickerį arba įmonės pavadinimą</h2>
+        <p>Pvz: <strong>AMZN</strong>, <strong>GOOGL</strong>, <strong>Apple</strong>, <strong>Natera</strong>...</p>
+        <p style="margin-top:20px">Sistemoje yra <strong>${HOLDINGS.length}</strong> pozicijų per 9 investuotojus.</p>
+      </div>`;
+    return;
+  }
+
+  // Match by ticker (exact or prefix), CUSIP, or name (substring)
+  const matches = HOLDINGS.filter(h => {
+    const t = (h.ticker || "").toUpperCase();
+    const n = (h.name || "").toUpperCase();
+    return t === CURRENT_QUERY || t.startsWith(CURRENT_QUERY) || n.includes(CURRENT_QUERY) || h.cusip === CURRENT_QUERY;
+  });
+
+  // Group by ticker (a query like "GOO" might match GOOGL + GOOG)
+  const byTicker = {};
+  matches.forEach(m => {
+    const key = m.ticker + "|" + m.cusip;
+    if (!byTicker[key]) byTicker[key] = { ticker: m.ticker, name: m.name, cusip: m.cusip, entries: [] };
+    byTicker[key].entries.push(m);
+  });
+
+  const groups = Object.values(byTicker).sort((a, b) =>
+    b.entries.length - a.entries.length ||
+    b.entries.reduce((s, e) => s + e.value, 0) - a.entries.reduce((s, e) => s + e.value, 0)
+  );
+
+  if (groups.length === 0) {
+    summary.className = "summary-bar no-match";
+    summary.innerHTML = `<h2>❌ Nei vienas investuotojas neturi "${CURRENT_QUERY}"</h2>`;
+    root.innerHTML = "";
+    return;
+  }
+
+  // Render
+  let html = "";
+  for (const g of groups) {
+    const totalVal = g.entries.reduce((s, e) => s + e.value, 0);
+    const totalShares = g.entries.reduce((s, e) => s + e.shares, 0);
+    const avgPnl = g.entries.filter(e => e.pnl_pct !== null).reduce((s, e, _, arr) => s + e.pnl_pct/arr.length, 0);
+    const validPnl = g.entries.filter(e => e.pnl_pct !== null);
+    const avgPnlValue = validPnl.length ? validPnl.reduce((s, e) => s + e.pnl_pct, 0) / validPnl.length : null;
+
+    if (groups.length === 1) {
+      summary.className = "summary-bar";
+      summary.innerHTML = `
+        <h2>${g.ticker} - ${g.name}</h2>
+        <div class="stat"><span class="stat-label">Laiko</span><span class="stat-value">${g.entries.length} investuotojai</span></div>
+        <div class="stat"><span class="stat-label">Bendros akcijos</span><span class="stat-value">${fmtShares(totalShares)}</span></div>
+        <div class="stat"><span class="stat-label">Bendra vertė</span><span class="stat-value">${fmtMoney(totalVal)}</span></div>
+        ${avgPnlValue !== null ? `<div class="stat"><span class="stat-label">Avg P&L</span><span class="stat-value" style="color:${avgPnlValue>=0?'var(--green)':'var(--red)'}">${(avgPnlValue>=0?'+':'')+avgPnlValue.toFixed(1)}%</span></div>` : ''}
+      `;
+    } else {
+      summary.className = "summary-bar";
+      summary.innerHTML = `<h2>${groups.length} atitikmenys "${CURRENT_QUERY}"</h2>`;
+    }
+
+    if (groups.length > 1) {
+      html += `<h3 style="margin-top:24px;font-size:18px;color:var(--accent)">${g.ticker} - ${g.name} <span style="color:var(--muted);font-weight:400;font-size:13px">(${g.entries.length} ${g.entries.length===1?'investuotojas':'investuotojai'})</span></h3>`;
+    }
+
+    // Sort entries by value
+    g.entries.sort((a, b) => b.value - a.value);
+
+    for (const e of g.entries) {
+      const actCls = activityClass(e.act_kind);
+      const pnlHtml = e.pnl_pct !== null ?
+        `<span class="${e.pnl_pct>=0?'green':'red'}">${(e.pnl_pct>=0?'+':'')+e.pnl_pct.toFixed(1)}%</span>` : '—';
+      const avgCostHtml = e.avg_cost ? `$${e.avg_cost.toFixed(2)}` : '—';
+      const curPriceHtml = e.current_price ? `$${e.current_price.toFixed(2)}` : '—';
+
+      html += `
+        <div class="investor-card">
+          <div class="investor-header">
+            <div class="investor-avatar" style="background:${e.color}">${e.initials}</div>
+            <div>
+              <div class="investor-name">${e.investor}</div>
+              <div class="investor-manager">${e.manager}</div>
+            </div>
+            <div class="investor-link"><a href="${e.investor_slug}.html">Pilnas portfelis →</a></div>
+          </div>
+          <div class="holding-details">
+            <div class="detail"><span class="detail-label">Akcijos</span><span class="detail-value">${fmtShares(e.shares)}</span></div>
+            <div class="detail"><span class="detail-label">Vertė</span><span class="detail-value">${fmtMoney(e.value)}</span></div>
+            <div class="detail"><span class="detail-label">% portfelio</span><span class="detail-value">${e.pct.toFixed(2)}%</span></div>
+            <div class="detail"><span class="detail-label">Veiksmas</span><span class="activity-badge ${actCls}">${e.activity}</span></div>
+            <div class="detail"><span class="detail-label">Avg pirkimo</span><span class="detail-value">${avgCostHtml}</span></div>
+            <div class="detail"><span class="detail-label">Dabar</span><span class="detail-value">${curPriceHtml}</span></div>
+            <div class="detail"><span class="detail-label">P&L</span><span class="detail-value">${pnlHtml}</span></div>
+          </div>
+        </div>`;
+    }
+  }
+  root.innerHTML = html;
+}
+
+function quickSearch(ticker) {
+  const input = document.getElementById("q");
+  input.value = ticker;
+  search(ticker);
+  input.focus();
+}
+
+(async () => {
+  await loadData();
+  const input = document.getElementById("q");
+  input.addEventListener("input", e => search(e.target.value));
+  // Allow ?q=TICKER URL parameter
+  const urlParams = new URLSearchParams(window.location.search);
+  const q = urlParams.get("q");
+  if (q) { input.value = q; search(q); }
+  else search("");
+})();
+</script>
+</body>
+</html>
